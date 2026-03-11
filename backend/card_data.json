@@ -1,0 +1,149 @@
+{
+  "issuers": [
+    { "name": "Chase" },
+    { "name": "American Express" },
+    { "name": "Capital One" },
+    { "name": "Discover" },
+    { "name": "Citi" },
+    { "name": "Bank of America" },
+    { "name": "US Bank" },
+    { "name": "Wells Fargo" }
+  ],
+  "categories": [
+    { "name": "Dining" },
+    { "name": "Travel" },
+    { "name": "Groceries" },
+    { "name": "Gas" },
+    { "name": "Streaming" },
+    { "name": "Drugstore" },
+    { "name": "Entertainment" },
+    { "name": "Online Shopping" },
+    { "name": "Transit" },
+    { "name": "Home Improvement" },
+    { "name": "Movies" },
+    { "name": "General" }
+  ],
+  "cards": [
+    { "issuer": "Chase",           "name": "Freedom Unlimited",   "network": "Visa" },
+    { "issuer": "Chase",           "name": "Freedom Flex",         "network": "Mastercard" },
+    { "issuer": "Chase",           "name": "Sapphire Preferred",   "network": "Visa" },
+    { "issuer": "Chase",           "name": "Sapphire Reserve",     "network": "Visa" },
+    { "issuer": "American Express","name": "Gold",                 "network": "American Express" },
+    { "issuer": "American Express","name": "Platinum",             "network": "American Express" },
+    { "issuer": "American Express","name": "Blue Cash Preferred",  "network": "American Express" },
+    { "issuer": "American Express","name": "Blue Cash Everyday",   "network": "American Express" },
+    { "issuer": "Capital One",     "name": "Venture",              "network": "Visa" },
+    { "issuer": "Capital One",     "name": "Venture X",            "network": "Visa" },
+    { "issuer": "Capital One",     "name": "SavorOne",             "network": "Mastercard" },
+    { "issuer": "Discover",        "name": "Discover it Cash Back","network": "Discover" },
+    { "issuer": "Discover",        "name": "Discover it Miles",    "network": "Discover" },
+    { "issuer": "Citi",            "name": "Double Cash",          "network": "Mastercard" },
+    { "issuer": "Citi",            "name": "Custom Cash",          "network": "Mastercard" },
+    { "issuer": "Citi",            "name": "Premier",              "network": "Mastercard" },
+    { "issuer": "Bank of America", "name": "Cash Rewards",         "network": "Visa" },
+    { "issuer": "Bank of America", "name": "Travel Rewards",       "network": "Visa" },
+    { "issuer": "US Bank",         "name": "Cash+",                "network": "Visa" },
+    { "issuer": "US Bank",         "name": "Altitude Go",          "network": "Visa" },
+    { "issuer": "Wells Fargo",     "name": "Active Cash",          "network": "Visa" }
+  ],
+  "rules": [
+    { "card": "Freedom Unlimited",   "issuer": "Chase",           "category": "General",        "multiplier": 1.5, "cap_amount": null, "cap_period": null, "is_rotating": false, "start_date": "2024-01-01", "end_date": null, "notes": "Unlimited 1.5% cash back on all purchases" },
+    { "card": "Freedom Unlimited",   "issuer": "Chase",           "category": "Dining",         "multiplier": 3.0, "cap_amount": null, "cap_period": null, "is_rotating": false, "start_date": "2024-01-01", "end_date": null, "notes": "3% cash back on dining" },
+    { "card": "Freedom Unlimited",   "issuer": "Chase",           "category": "Drugstore",      "multiplier": 3.0, "cap_amount": null, "cap_period": null, "is_rotating": false, "start_date": "2024-01-01", "end_date": null, "notes": "3% cash back at drugstores" },
+    { "card": "Freedom Unlimited",   "issuer": "Chase",           "category": "Travel",         "multiplier": 5.0, "cap_amount": null, "cap_period": null, "is_rotating": false, "start_date": "2024-01-01", "end_date": null, "notes": "5% cash back on travel purchased through Chase Travel portal" },
+
+    { "card": "Freedom Flex",        "issuer": "Chase",           "category": "General",        "multiplier": 1.0, "cap_amount": null, "cap_period": null, "is_rotating": false, "start_date": "2024-01-01", "end_date": null, "notes": "1% cash back on all other purchases" },
+    { "card": "Freedom Flex",        "issuer": "Chase",           "category": "Dining",         "multiplier": 3.0, "cap_amount": null, "cap_period": null, "is_rotating": false, "start_date": "2024-01-01", "end_date": null, "notes": "3% cash back on dining" },
+    { "card": "Freedom Flex",        "issuer": "Chase",           "category": "Drugstore",      "multiplier": 3.0, "cap_amount": null, "cap_period": null, "is_rotating": false, "start_date": "2024-01-01", "end_date": null, "notes": "3% cash back at drugstores" },
+    { "card": "Freedom Flex",        "issuer": "Chase",           "category": "Travel",         "multiplier": 5.0, "cap_amount": null, "cap_period": null, "is_rotating": false, "start_date": "2024-01-01", "end_date": null, "notes": "5% cash back on travel through Chase Travel portal" },
+    { "card": "Freedom Flex",        "issuer": "Chase",           "category": "Gas",            "multiplier": 5.0, "cap_amount": 1500, "cap_period": "QUARTERLY", "is_rotating": true, "start_date": "2026-01-01", "end_date": "2026-03-31", "notes": "Q1 2026 rotating: Gas & EV Charging Stations" },
+    { "card": "Freedom Flex",        "issuer": "Chase",           "category": "Entertainment",  "multiplier": 5.0, "cap_amount": 1500, "cap_period": "QUARTERLY", "is_rotating": true, "start_date": "2026-01-01", "end_date": "2026-03-31", "notes": "Q1 2026 rotating: Select Live Entertainment" },
+    { "card": "Freedom Flex",        "issuer": "Chase",           "category": "Streaming",      "multiplier": 5.0, "cap_amount": 1500, "cap_period": "QUARTERLY", "is_rotating": true, "start_date": "2026-04-01", "end_date": "2026-06-30", "notes": "Q2 2026 rotating: Select Streaming Services" },
+    { "card": "Freedom Flex",        "issuer": "Chase",           "category": "Online Shopping","multiplier": 5.0, "cap_amount": 1500, "cap_period": "QUARTERLY", "is_rotating": true, "start_date": "2026-04-01", "end_date": "2026-06-30", "notes": "Q2 2026 rotating: Select Online Shopping" },
+
+    { "card": "Sapphire Preferred",  "issuer": "Chase",           "category": "General",        "multiplier": 1.0, "cap_amount": null, "cap_period": null, "is_rotating": false, "start_date": "2024-01-01", "end_date": null, "notes": "1x points on all other purchases" },
+    { "card": "Sapphire Preferred",  "issuer": "Chase",           "category": "Dining",         "multiplier": 3.0, "cap_amount": null, "cap_period": null, "is_rotating": false, "start_date": "2024-01-01", "end_date": null, "notes": "3x points on dining worldwide" },
+    { "card": "Sapphire Preferred",  "issuer": "Chase",           "category": "Travel",         "multiplier": 2.0, "cap_amount": null, "cap_period": null, "is_rotating": false, "start_date": "2024-01-01", "end_date": null, "notes": "2x points on travel worldwide" },
+    { "card": "Sapphire Preferred",  "issuer": "Chase",           "category": "Streaming",      "multiplier": 3.0, "cap_amount": null, "cap_period": null, "is_rotating": false, "start_date": "2024-01-01", "end_date": null, "notes": "3x points on select streaming services" },
+    { "card": "Sapphire Preferred",  "issuer": "Chase",           "category": "Groceries",      "multiplier": 3.0, "cap_amount": null, "cap_period": null, "is_rotating": false, "start_date": "2024-01-01", "end_date": null, "notes": "3x points on online grocery purchases (excluding Target, Walmart, wholesale clubs)" },
+
+    { "card": "Sapphire Reserve",    "issuer": "Chase",           "category": "General",        "multiplier": 1.0, "cap_amount": null, "cap_period": null, "is_rotating": false, "start_date": "2024-01-01", "end_date": null, "notes": "1x points on all other purchases" },
+    { "card": "Sapphire Reserve",    "issuer": "Chase",           "category": "Dining",         "multiplier": 3.0, "cap_amount": null, "cap_period": null, "is_rotating": false, "start_date": "2024-01-01", "end_date": null, "notes": "3x points on dining worldwide" },
+    { "card": "Sapphire Reserve",    "issuer": "Chase",           "category": "Travel",         "multiplier": 3.0, "cap_amount": null, "cap_period": null, "is_rotating": false, "start_date": "2024-01-01", "end_date": null, "notes": "3x points on travel worldwide (after $300 travel credit)" },
+
+    { "card": "Gold",                "issuer": "American Express","category": "General",        "multiplier": 1.0, "cap_amount": null, "cap_period": null, "is_rotating": false, "start_date": "2024-01-01", "end_date": null, "notes": "1x Membership Rewards points on all other purchases" },
+    { "card": "Gold",                "issuer": "American Express","category": "Dining",         "multiplier": 4.0, "cap_amount": null, "cap_period": null, "is_rotating": false, "start_date": "2024-01-01", "end_date": null, "notes": "4x Membership Rewards points on dining worldwide" },
+    { "card": "Gold",                "issuer": "American Express","category": "Groceries",      "multiplier": 4.0, "cap_amount": 25000, "cap_period": "YEARLY", "is_rotating": false, "start_date": "2024-01-01", "end_date": null, "notes": "4x Membership Rewards points at U.S. supermarkets (up to $25k/year)" },
+    { "card": "Gold",                "issuer": "American Express","category": "Travel",         "multiplier": 3.0, "cap_amount": null, "cap_period": null, "is_rotating": false, "start_date": "2024-01-01", "end_date": null, "notes": "3x Membership Rewards points on flights booked directly or via Amex Travel" },
+
+    { "card": "Platinum",            "issuer": "American Express","category": "General",        "multiplier": 1.0, "cap_amount": null, "cap_period": null, "is_rotating": false, "start_date": "2024-01-01", "end_date": null, "notes": "1x Membership Rewards points on all other purchases" },
+    { "card": "Platinum",            "issuer": "American Express","category": "Travel",         "multiplier": 5.0, "cap_amount": null, "cap_period": null, "is_rotating": false, "start_date": "2024-01-01", "end_date": null, "notes": "5x Membership Rewards points on flights booked directly with airlines or via Amex Travel; 5x on prepaid hotels via Amex Travel" },
+
+    { "card": "Blue Cash Preferred", "issuer": "American Express","category": "General",        "multiplier": 1.0, "cap_amount": null, "cap_period": null, "is_rotating": false, "start_date": "2024-01-01", "end_date": null, "notes": "1% cash back on all other purchases" },
+    { "card": "Blue Cash Preferred", "issuer": "American Express","category": "Groceries",      "multiplier": 6.0, "cap_amount": 6000, "cap_period": "YEARLY", "is_rotating": false, "start_date": "2024-01-01", "end_date": null, "notes": "6% cash back at U.S. supermarkets (up to $6k/year)" },
+    { "card": "Blue Cash Preferred", "issuer": "American Express","category": "Streaming",      "multiplier": 6.0, "cap_amount": null, "cap_period": null, "is_rotating": false, "start_date": "2024-01-01", "end_date": null, "notes": "6% cash back on select U.S. streaming services" },
+    { "card": "Blue Cash Preferred", "issuer": "American Express","category": "Gas",            "multiplier": 3.0, "cap_amount": null, "cap_period": null, "is_rotating": false, "start_date": "2024-01-01", "end_date": null, "notes": "3% cash back at U.S. gas stations" },
+    { "card": "Blue Cash Preferred", "issuer": "American Express","category": "Transit",        "multiplier": 3.0, "cap_amount": null, "cap_period": null, "is_rotating": false, "start_date": "2024-01-01", "end_date": null, "notes": "3% cash back on transit (trains, taxis, rideshare, buses, ferries, tolls, parking)" },
+
+    { "card": "Blue Cash Everyday",  "issuer": "American Express","category": "General",        "multiplier": 1.0, "cap_amount": null, "cap_period": null, "is_rotating": false, "start_date": "2024-01-01", "end_date": null, "notes": "1% cash back on all other purchases" },
+    { "card": "Blue Cash Everyday",  "issuer": "American Express","category": "Groceries",      "multiplier": 3.0, "cap_amount": 6000, "cap_period": "YEARLY", "is_rotating": false, "start_date": "2024-01-01", "end_date": null, "notes": "3% cash back at U.S. supermarkets (up to $6k/year)" },
+    { "card": "Blue Cash Everyday",  "issuer": "American Express","category": "Gas",            "multiplier": 3.0, "cap_amount": null, "cap_period": null, "is_rotating": false, "start_date": "2024-01-01", "end_date": null, "notes": "3% cash back at U.S. gas stations" },
+    { "card": "Blue Cash Everyday",  "issuer": "American Express","category": "Online Shopping","multiplier": 3.0, "cap_amount": null, "cap_period": null, "is_rotating": false, "start_date": "2024-01-01", "end_date": null, "notes": "3% cash back on U.S. online retail purchases" },
+
+    { "card": "Venture",             "issuer": "Capital One",     "category": "General",        "multiplier": 2.0, "cap_amount": null, "cap_period": null, "is_rotating": false, "start_date": "2024-01-01", "end_date": null, "notes": "2x miles on every purchase" },
+    { "card": "Venture",             "issuer": "Capital One",     "category": "Travel",         "multiplier": 5.0, "cap_amount": null, "cap_period": null, "is_rotating": false, "start_date": "2024-01-01", "end_date": null, "notes": "5x miles on hotels and rental cars booked through Capital One Travel" },
+
+    { "card": "Venture X",           "issuer": "Capital One",     "category": "General",        "multiplier": 2.0, "cap_amount": null, "cap_period": null, "is_rotating": false, "start_date": "2024-01-01", "end_date": null, "notes": "2x miles on every purchase" },
+    { "card": "Venture X",           "issuer": "Capital One",     "category": "Travel",         "multiplier": 10.0,"cap_amount": null, "cap_period": null, "is_rotating": false, "start_date": "2024-01-01", "end_date": null, "notes": "10x miles on hotels and rental cars booked through Capital One Travel; 5x on flights" },
+
+    { "card": "SavorOne",            "issuer": "Capital One",     "category": "General",        "multiplier": 1.0, "cap_amount": null, "cap_period": null, "is_rotating": false, "start_date": "2024-01-01", "end_date": null, "notes": "1% cash back on all other purchases" },
+    { "card": "SavorOne",            "issuer": "Capital One",     "category": "Dining",         "multiplier": 3.0, "cap_amount": null, "cap_period": null, "is_rotating": false, "start_date": "2024-01-01", "end_date": null, "notes": "3% cash back on dining" },
+    { "card": "SavorOne",            "issuer": "Capital One",     "category": "Entertainment",  "multiplier": 3.0, "cap_amount": null, "cap_period": null, "is_rotating": false, "start_date": "2024-01-01", "end_date": null, "notes": "3% cash back on entertainment" },
+    { "card": "SavorOne",            "issuer": "Capital One",     "category": "Streaming",      "multiplier": 3.0, "cap_amount": null, "cap_period": null, "is_rotating": false, "start_date": "2024-01-01", "end_date": null, "notes": "3% cash back on select streaming services" },
+    { "card": "SavorOne",            "issuer": "Capital One",     "category": "Groceries",      "multiplier": 3.0, "cap_amount": null, "cap_period": null, "is_rotating": false, "start_date": "2024-01-01", "end_date": null, "notes": "3% cash back at grocery stores (excluding superstores like Walmart and Target)" },
+
+    { "card": "Discover it Cash Back","issuer": "Discover",       "category": "General",        "multiplier": 1.0, "cap_amount": null, "cap_period": null, "is_rotating": false, "start_date": "2024-01-01", "end_date": null, "notes": "1% cash back on all other purchases" },
+    { "card": "Discover it Cash Back","issuer": "Discover",       "category": "Groceries",      "multiplier": 5.0, "cap_amount": 1500, "cap_period": "QUARTERLY", "is_rotating": true, "start_date": "2026-01-01", "end_date": "2026-03-31", "notes": "Q1 2026 rotating 5% category: Grocery Stores" },
+    { "card": "Discover it Cash Back","issuer": "Discover",       "category": "Home Improvement","multiplier": 5.0, "cap_amount": 1500, "cap_period": "QUARTERLY", "is_rotating": true, "start_date": "2026-01-01", "end_date": "2026-03-31", "notes": "Q1 2026 rotating 5% category: Home Improvement Stores" },
+    { "card": "Discover it Cash Back","issuer": "Discover",       "category": "Gas",            "multiplier": 5.0, "cap_amount": 1500, "cap_period": "QUARTERLY", "is_rotating": true, "start_date": "2026-04-01", "end_date": "2026-06-30", "notes": "Q2 2026 rotating 5% category: Gas Stations & EV Charging" },
+    { "card": "Discover it Cash Back","issuer": "Discover",       "category": "Streaming",      "multiplier": 5.0, "cap_amount": 1500, "cap_period": "QUARTERLY", "is_rotating": true, "start_date": "2026-04-01", "end_date": "2026-06-30", "notes": "Q2 2026 rotating 5% category: Select Streaming Services" },
+    { "card": "Discover it Cash Back","issuer": "Discover",       "category": "Dining",         "multiplier": 5.0, "cap_amount": 1500, "cap_period": "QUARTERLY", "is_rotating": true, "start_date": "2026-07-01", "end_date": "2026-09-30", "notes": "Q3 2026 rotating 5% category: Restaurants" },
+    { "card": "Discover it Cash Back","issuer": "Discover",       "category": "Entertainment",  "multiplier": 5.0, "cap_amount": 1500, "cap_period": "QUARTERLY", "is_rotating": true, "start_date": "2026-07-01", "end_date": "2026-09-30", "notes": "Q3 2026 rotating 5% category: Live Entertainment & Events" },
+    { "card": "Discover it Cash Back","issuer": "Discover",       "category": "Online Shopping","multiplier": 5.0, "cap_amount": 1500, "cap_period": "QUARTERLY", "is_rotating": true, "start_date": "2026-10-01", "end_date": "2026-12-31", "notes": "Q4 2026 rotating 5% category: Amazon, Wholesale Clubs, Target" },
+
+    { "card": "Discover it Miles",   "issuer": "Discover",        "category": "General",        "multiplier": 1.5, "cap_amount": null, "cap_period": null, "is_rotating": false, "start_date": "2024-01-01", "end_date": null, "notes": "1.5x miles on every purchase" },
+
+    { "card": "Double Cash",         "issuer": "Citi",            "category": "General",        "multiplier": 2.0, "cap_amount": null, "cap_period": null, "is_rotating": false, "start_date": "2024-01-01", "end_date": null, "notes": "2% cash back on all purchases (1% when you buy + 1% when you pay)" },
+
+    { "card": "Custom Cash",         "issuer": "Citi",            "category": "General",        "multiplier": 1.0, "cap_amount": null, "cap_period": null, "is_rotating": false, "start_date": "2024-01-01", "end_date": null, "notes": "1% cash back on all other purchases" },
+    { "card": "Custom Cash",         "issuer": "Citi",            "category": "Dining",         "multiplier": 5.0, "cap_amount": 500,  "cap_period": "MONTHLY", "is_rotating": false, "start_date": "2024-01-01", "end_date": null, "notes": "5% cash back on top eligible spend category each billing cycle (up to $500/month)" },
+    { "card": "Custom Cash",         "issuer": "Citi",            "category": "Groceries",      "multiplier": 5.0, "cap_amount": 500,  "cap_period": "MONTHLY", "is_rotating": false, "start_date": "2024-01-01", "end_date": null, "notes": "5% cash back on top eligible spend category each billing cycle (up to $500/month)" },
+    { "card": "Custom Cash",         "issuer": "Citi",            "category": "Gas",            "multiplier": 5.0, "cap_amount": 500,  "cap_period": "MONTHLY", "is_rotating": false, "start_date": "2024-01-01", "end_date": null, "notes": "5% cash back on top eligible spend category each billing cycle (up to $500/month)" },
+    { "card": "Custom Cash",         "issuer": "Citi",            "category": "Travel",         "multiplier": 5.0, "cap_amount": 500,  "cap_period": "MONTHLY", "is_rotating": false, "start_date": "2024-01-01", "end_date": null, "notes": "5% cash back on top eligible spend category each billing cycle (up to $500/month)" },
+
+    { "card": "Premier",             "issuer": "Citi",            "category": "General",        "multiplier": 1.0, "cap_amount": null, "cap_period": null, "is_rotating": false, "start_date": "2024-01-01", "end_date": null, "notes": "1x ThankYou points on all other purchases" },
+    { "card": "Premier",             "issuer": "Citi",            "category": "Dining",         "multiplier": 3.0, "cap_amount": null, "cap_period": null, "is_rotating": false, "start_date": "2024-01-01", "end_date": null, "notes": "3x ThankYou points at restaurants" },
+    { "card": "Premier",             "issuer": "Citi",            "category": "Groceries",      "multiplier": 3.0, "cap_amount": null, "cap_period": null, "is_rotating": false, "start_date": "2024-01-01", "end_date": null, "notes": "3x ThankYou points at grocery stores" },
+    { "card": "Premier",             "issuer": "Citi",            "category": "Gas",            "multiplier": 3.0, "cap_amount": null, "cap_period": null, "is_rotating": false, "start_date": "2024-01-01", "end_date": null, "notes": "3x ThankYou points at gas stations" },
+    { "card": "Premier",             "issuer": "Citi",            "category": "Travel",         "multiplier": 3.0, "cap_amount": null, "cap_period": null, "is_rotating": false, "start_date": "2024-01-01", "end_date": null, "notes": "3x ThankYou points on air travel, hotels, and travel agencies" },
+
+    { "card": "Cash Rewards",        "issuer": "Bank of America", "category": "General",        "multiplier": 1.0, "cap_amount": null, "cap_period": null, "is_rotating": false, "start_date": "2024-01-01", "end_date": null, "notes": "1% cash back on all other purchases" },
+    { "card": "Cash Rewards",        "issuer": "Bank of America", "category": "Dining",         "multiplier": 3.0, "cap_amount": null, "cap_period": null, "is_rotating": false, "start_date": "2024-01-01", "end_date": null, "notes": "3% cash back in chosen category (dining selected by default)" },
+    { "card": "Cash Rewards",        "issuer": "Bank of America", "category": "Groceries",      "multiplier": 2.0, "cap_amount": 2500, "cap_period": "QUARTERLY", "is_rotating": false, "start_date": "2024-01-01", "end_date": null, "notes": "2% cash back at grocery stores & wholesale clubs (up to $2,500 combined with 3% category/quarter)" },
+
+    { "card": "Travel Rewards",      "issuer": "Bank of America", "category": "General",        "multiplier": 1.5, "cap_amount": null, "cap_period": null, "is_rotating": false, "start_date": "2024-01-01", "end_date": null, "notes": "1.5x points on all purchases" },
+
+    { "card": "Cash+",               "issuer": "US Bank",         "category": "General",        "multiplier": 1.0, "cap_amount": null, "cap_period": null, "is_rotating": false, "start_date": "2024-01-01", "end_date": null, "notes": "1% cash back on all other purchases" },
+    { "card": "Cash+",               "issuer": "US Bank",         "category": "Dining",         "multiplier": 2.0, "cap_amount": null, "cap_period": null, "is_rotating": false, "start_date": "2024-01-01", "end_date": null, "notes": "2% cash back on one everyday category (dining chosen)" },
+    { "card": "Cash+",               "issuer": "US Bank",         "category": "Streaming",      "multiplier": 5.0, "cap_amount": 2000, "cap_period": "QUARTERLY", "is_rotating": false, "start_date": "2024-01-01", "end_date": null, "notes": "5% cash back on two chosen categories each quarter (up to $2k/quarter combined)" },
+    { "card": "Cash+",               "issuer": "US Bank",         "category": "Home Improvement","multiplier": 5.0, "cap_amount": 2000, "cap_period": "QUARTERLY", "is_rotating": false, "start_date": "2024-01-01", "end_date": null, "notes": "5% cash back on two chosen categories each quarter (up to $2k/quarter combined)" },
+
+    { "card": "Altitude Go",         "issuer": "US Bank",         "category": "General",        "multiplier": 1.0, "cap_amount": null, "cap_period": null, "is_rotating": false, "start_date": "2024-01-01", "end_date": null, "notes": "1x points on all other purchases" },
+    { "card": "Altitude Go",         "issuer": "US Bank",         "category": "Dining",         "multiplier": 4.0, "cap_amount": null, "cap_period": null, "is_rotating": false, "start_date": "2024-01-01", "end_date": null, "notes": "4x points on dining, takeout, and restaurant delivery" },
+    { "card": "Altitude Go",         "issuer": "US Bank",         "category": "Groceries",      "multiplier": 2.0, "cap_amount": null, "cap_period": null, "is_rotating": false, "start_date": "2024-01-01", "end_date": null, "notes": "2x points at grocery stores" },
+    { "card": "Altitude Go",         "issuer": "US Bank",         "category": "Streaming",      "multiplier": 2.0, "cap_amount": null, "cap_period": null, "is_rotating": false, "start_date": "2024-01-01", "end_date": null, "notes": "2x points on streaming services" },
+    { "card": "Altitude Go",         "issuer": "US Bank",         "category": "Gas",            "multiplier": 2.0, "cap_amount": null, "cap_period": null, "is_rotating": false, "start_date": "2024-01-01", "end_date": null, "notes": "2x points at gas stations and EV charging stations" },
+
+    { "card": "Active Cash",         "issuer": "Wells Fargo",     "category": "General",        "multiplier": 2.0, "cap_amount": null, "cap_period": null, "is_rotating": false, "start_date": "2024-01-01", "end_date": null, "notes": "2% cash rewards on all purchases, no categories to track" }
+  ]
+}
