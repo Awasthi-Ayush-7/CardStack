@@ -4,7 +4,7 @@
  * index.html for all navigation requests (SPA support).
  */
 
-const CACHE_NAME = 'rewardsiq-cache-v1';
+const CACHE_NAME = 'cardstack-cache-v1';
 
 // Skip waiting so the new SW activates immediately
 self.addEventListener('install', () => {

@@ -87,6 +87,7 @@ export function getRecommendations(
       multiplier: bestRule.multiplier,
       explanation: buildExplanation(bestRule, categoryName, isFallback),
       card_id: card.id,
+      annual_fee: card.annual_fee,
       is_general_fallback: isFallback,
     });
   }
@@ -112,6 +113,7 @@ export function getRecommendations(
         multiplier: bestRule.multiplier,
         explanation: buildExplanation(bestRule, categoryName, false),
         card_id: card.id,
+        annual_fee: card.annual_fee,
         user_owns: userCardIds.includes(card.id),
       };
     }

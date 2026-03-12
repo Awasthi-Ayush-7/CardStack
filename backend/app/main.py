@@ -16,7 +16,7 @@ seed_database()
 
 # Create FastAPI app
 app = FastAPI(
-    title="Credit Card Rewards Optimizer",
+    title="CardStack",
     description="MVP for recommending the best credit card based on spending categories",
     version="1.0.0"
 )
@@ -46,7 +46,7 @@ app.include_router(suggestions.router, prefix="/api")
 def root():
     """Root endpoint."""
     return {
-        "message": "Credit Card Rewards Optimizer API",
+        "message": "CardStack API",
         "version": "1.0.0"
     }
 

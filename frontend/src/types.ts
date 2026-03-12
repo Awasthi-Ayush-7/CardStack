@@ -19,6 +19,7 @@ export interface CreditCard {
   name: string;
   issuer_id: number;
   network: string;
+  annual_fee: number;
   issuer?: CardIssuer;
 }
 
@@ -39,6 +40,7 @@ export interface RecommendationItem {
   multiplier: number;
   explanation: string;
   card_id: number;
+  annual_fee: number;
   is_general_fallback: boolean;
 }
 
@@ -48,6 +50,7 @@ export interface BestOverallItem {
   multiplier: number;
   explanation: string;
   card_id: number;
+  annual_fee: number;
   user_owns: boolean;
 }
 
@@ -55,6 +58,36 @@ export interface RecommendationResponse {
   category: string;
   recommendations: RecommendationItem[];
   best_overall: BestOverallItem | null;
+}
+
+// Portfolio Optimizer Types
+export interface SpendingEntry {
+  category: string;
+  monthly_amount: number;
+}
+
+export interface PortfolioCategoryResult {
+  category: string;
+  monthly_amount: number;
+  best_card: string | null;
+  multiplier: number;
+  annual_rewards: number;
+  annual_fee: number;
+  net_annual_value: number;
+}
+
+export interface SuggestedCard {
+  card_name: string;
+  issuer: string;
+  annual_fee: number;
+  improvement: number;
+}
+
+export interface PortfolioResponse {
+  per_category: PortfolioCategoryResult[];
+  total_estimated_rewards: number;
+  total_net_value: number;
+  suggested_additions: SuggestedCard[];
 }
 
 export interface CardSuggestion {

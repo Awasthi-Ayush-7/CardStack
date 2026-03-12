@@ -7,7 +7,7 @@ from sqlalchemy.orm import Session
 from ..database import get_db
 from ..auth import get_current_user_db
 from ..models import RewardCategory, UserCard, User
-from ..schemas import RecommendationResponse
+from ..schemas import RecommendationResponse, SpendingProfile, PortfolioResponse
 from ..services.reward_service import RewardService
 
 router = APIRouter(prefix="/recommendations", tags=["recommendations"])
@@ -52,3 +52,20 @@ def get_recommendations(
         recommendations=recommendations,
         best_overall=best_overall,
     )
+
+
+@router.post("/portfolio", response_model=PortfolioResponse)
+def get_portfolio_recommendation(
+    profile: SpendingProfile,
+    current_user: User = Depends(get_current_user_db),
+    db: Session = Depends(get_db)
+):
+    """
+    Optimize card usage across a full spending profile.
+
+    Provide monthly spend per category and receive:
+    - The best card from your wallet for each category
+    - Estimated annual rewards and net value after fees
+    - Up to 3 suggested cards to add that would improve your total rewards
+    """
+    return RewardService.optimize_portfolio(db, current_user.id, profile.spending)

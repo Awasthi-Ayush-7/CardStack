@@ -254,6 +254,19 @@ const BestCardFinder: React.FC = () => {
                             General rate
                           </span>
                         )}
+                        <span
+                          style={{
+                            fontSize: 11,
+                            fontWeight: 500,
+                            color: rec.annual_fee > 0 ? 'var(--color-text-muted)' : 'var(--color-success)',
+                            background: 'var(--color-surface-raised)',
+                            border: '1px solid var(--color-border)',
+                            borderRadius: 'var(--radius-full)',
+                            padding: '2px 8px',
+                          }}
+                        >
+                          {rec.annual_fee > 0 ? `$${rec.annual_fee}/yr` : 'No annual fee'}
+                        </span>
                       </div>
                       <div style={{ fontSize: 13, color: 'var(--color-text-muted)', lineHeight: 1.4, marginTop: 4 }}>
                         {rec.explanation}
@@ -382,6 +395,19 @@ const BestCardFinder: React.FC = () => {
                       }}
                     >
                       Not in your wallet
+                    </span>
+                    <span
+                      style={{
+                        fontSize: 11,
+                        fontWeight: 500,
+                        color: bestOverall.annual_fee > 0 ? 'var(--color-text-muted)' : 'var(--color-success)',
+                        background: 'var(--color-surface-raised)',
+                        border: '1px solid var(--color-border)',
+                        borderRadius: 'var(--radius-full)',
+                        padding: '2px 8px',
+                      }}
+                    >
+                      {bestOverall.annual_fee > 0 ? `$${bestOverall.annual_fee}/yr` : 'No annual fee'}
                     </span>
                   </div>
                   <div style={{ fontSize: 13, color: 'var(--color-text-muted)', lineHeight: 1.4 }}>

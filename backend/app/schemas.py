@@ -73,6 +73,7 @@ class CreditCardCreate(CreditCardBase):
 class CreditCard(CreditCardBase):
     id: int
     issuer_id: int
+    annual_fee: float = 0.0
     issuer: Optional[CardIssuer] = None
 
     class Config:
@@ -135,6 +136,7 @@ class RecommendationItem(BaseModel):
     multiplier: float
     explanation: str
     card_id: int
+    annual_fee: float = 0.0
     is_general_fallback: bool = False  # True when showing General rate (no specific rule for category)
 
 
@@ -144,6 +146,7 @@ class BestOverallItem(BaseModel):
     multiplier: float
     explanation: str
     card_id: int
+    annual_fee: float = 0.0
     user_owns: bool  # True if the user already has this card in their collection
 
 
@@ -181,6 +184,40 @@ class CardSuggestion(BaseModel):
 class CardSuggestionStatusUpdate(BaseModel):
     status: str  # pending, reviewed, added, declined
     admin_notes: Optional[str] = None
+
+
+# Portfolio Optimizer Schemas
+class SpendingEntry(BaseModel):
+    category: str
+    monthly_amount: float
+
+
+class SpendingProfile(BaseModel):
+    spending: List[SpendingEntry]
+
+
+class PortfolioCategoryResult(BaseModel):
+    category: str
+    monthly_amount: float
+    best_card: Optional[str] = None       # best card name from user's wallet (None if no cards)
+    multiplier: float = 0.0
+    annual_rewards: float = 0.0           # multiplier * monthly_amount * 12
+    annual_fee: float = 0.0
+    net_annual_value: float = 0.0         # annual_rewards - prorated annual_fee
+
+
+class SuggestedCard(BaseModel):
+    card_name: str
+    issuer: str
+    annual_fee: float
+    improvement: float                    # additional net annual value vs. current best
+
+
+class PortfolioResponse(BaseModel):
+    per_category: List[PortfolioCategoryResult]
+    total_estimated_rewards: float        # sum of annual_rewards across categories
+    total_net_value: float                # after each card's fee counted once
+    suggested_additions: List[SuggestedCard]  # top 3 catalog cards not in wallet
 
 
 # Admin User View Schema

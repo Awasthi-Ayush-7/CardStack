@@ -51,7 +51,7 @@ const AuthPage: React.FC<{ children: React.ReactNode }> = ({ children }) => (
         ✦
       </div>
       <span style={{ fontWeight: 700, fontSize: 18, color: 'var(--color-text)', letterSpacing: '-0.3px' }}>
-        RewardsIQ
+        CardStack
       </span>
     </div>
     <div

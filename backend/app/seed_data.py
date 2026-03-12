@@ -20,6 +20,14 @@ def _run_migrations():
                 conn.commit()
                 print("Migration: added 'role' column to users table")
 
+        # Add 'annual_fee' column to credit_cards if it doesn't exist
+        if "credit_cards" in inspector.get_table_names():
+            existing_cols = [c["name"] for c in inspector.get_columns("credit_cards")]
+            if "annual_fee" not in existing_cols:
+                conn.execute(text("ALTER TABLE credit_cards ADD COLUMN annual_fee FLOAT NOT NULL DEFAULT 0.0"))
+                conn.commit()
+                print("Migration: added 'annual_fee' column to credit_cards table")
+
 
 def seed_database():
     """Sync card data from card_data.json into the database on startup."""

@@ -68,6 +68,7 @@ class CreditCard(Base):
     issuer_id = Column(Integer, ForeignKey("card_issuers.id"), nullable=False)
     name = Column(String, nullable=False)  # No longer unique - same name can exist for different issuers
     network = Column(String, nullable=False)  # Visa, Mastercard, Amex, etc.
+    annual_fee = Column(Float, nullable=False, default=0.0, server_default="0.0")
 
     # Relationships
     issuer = relationship("CardIssuer", back_populates="credit_cards")

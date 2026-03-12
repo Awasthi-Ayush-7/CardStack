@@ -99,18 +99,21 @@ def _upsert_cards(db: Session, cards: list, issuer_map: dict) -> dict:
         if issuer_id is None:
             continue
 
+        annual_fee = float(item.get("annual_fee", 0.0))
+
         card = db.query(CreditCard).filter(
             CreditCard.issuer_id == issuer_id,
             CreditCard.name == card_name,
         ).first()
 
         if not card:
-            card = CreditCard(issuer_id=issuer_id, name=card_name, network=network)
+            card = CreditCard(issuer_id=issuer_id, name=card_name, network=network, annual_fee=annual_fee)
             db.add(card)
             db.flush()
         else:
-            # Update network in case it changed
+            # Update network and annual_fee in case they changed
             card.network = network
+            card.annual_fee = annual_fee
             db.flush()
 
         card_map[(issuer_name, card_name)] = card.id

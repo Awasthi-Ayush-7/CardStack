@@ -293,7 +293,7 @@ const Login: React.FC = () => {
               ✦
             </div>
             <span style={{ fontWeight: 700, fontSize: 20, color: '#e8eeff', letterSpacing: '-0.3px' }}>
-              RewardsIQ
+              CardStack
             </span>
           </div>
 
@@ -327,7 +327,7 @@ const Login: React.FC = () => {
               </span>
             </h1>
             <p style={{ fontSize: 16, color: '#6b7fa3', lineHeight: 1.65, margin: 0, maxWidth: 420 }}>
-              RewardsIQ tells you exactly which card in your wallet earns the most points for every purchase — no spreadsheets needed.
+              CardStack tells you exactly which card in your wallet earns the most points for every purchase — no spreadsheets needed.
             </p>
           </div>
 
@@ -426,7 +426,7 @@ const Login: React.FC = () => {
               </h2>
               <p style={{ margin: '0 0 24px', fontSize: 13, color: '#6b7fa3' }}>
                 {mode === 'login'
-                  ? 'Sign in to continue to RewardsIQ'
+                  ? 'Sign in to continue to CardStack'
                   : 'Start optimizing your card rewards today'}
               </p>
 

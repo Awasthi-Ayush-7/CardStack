@@ -13,15 +13,16 @@ import { IS_STATIC } from './config';
 import './App.css';
 
 // Lazy-load heavy feature components to reduce initial bundle size
-const MyCards        = lazy(() => import('./components/MyCards'));
-const BestCardFinder = lazy(() => import('./components/BestCardFinder'));
-const SuggestCard    = lazy(() => import('./components/SuggestCard'));
-const AdminPanel     = lazy(() => import('./components/AdminPanel'));
-const Login          = lazy(() => import('./components/Login'));
-const ForgotPassword = lazy(() => import('./components/ForgotPassword'));
-const ResetPassword  = lazy(() => import('./components/ResetPassword'));
+const MyCards             = lazy(() => import('./components/MyCards'));
+const BestCardFinder      = lazy(() => import('./components/BestCardFinder'));
+const PortfolioOptimizer  = lazy(() => import('./components/PortfolioOptimizer'));
+const SuggestCard         = lazy(() => import('./components/SuggestCard'));
+const AdminPanel          = lazy(() => import('./components/AdminPanel'));
+const Login               = lazy(() => import('./components/Login'));
+const ForgotPassword      = lazy(() => import('./components/ForgotPassword'));
+const ResetPassword       = lazy(() => import('./components/ResetPassword'));
 
-type Screen = 'my-cards' | 'finder' | 'suggest' | 'admin';
+type Screen = 'my-cards' | 'finder' | 'portfolio' | 'suggest' | 'admin';
 
 const LoadingSpinner: React.FC = () => (
   <div
@@ -72,10 +73,11 @@ const Dashboard: React.FC = () => {
 
   type NavItem = { key: Screen; label: string };
   const navItems: NavItem[] = [
-    { key: 'my-cards', label: 'My Cards' },
-    { key: 'finder',   label: 'Best Card Finder' },
-    ...(!IS_STATIC ? [{ key: 'suggest' as Screen, label: 'Suggest a Card' }] : []),
-    ...(isAdmin    ? [{ key: 'admin'   as Screen, label: 'Admin' }] : []),
+    { key: 'my-cards',   label: 'My Cards' },
+    { key: 'finder',     label: 'Best Card Finder' },
+    ...(!IS_STATIC ? [{ key: 'portfolio' as Screen, label: 'Portfolio' }] : []),
+    ...(!IS_STATIC ? [{ key: 'suggest'   as Screen, label: 'Suggest a Card' }] : []),
+    ...(isAdmin    ? [{ key: 'admin'     as Screen, label: 'Admin' }] : []),
   ];
 
   return (
@@ -111,7 +113,7 @@ const Dashboard: React.FC = () => {
                 letterSpacing: '-0.3px',
               }}
             >
-              RewardsIQ
+              CardStack
             </span>
           </div>
 
@@ -212,10 +214,11 @@ const Dashboard: React.FC = () => {
 
       <main>
         <Suspense fallback={<LoadingSpinner />}>
-          {currentScreen === 'my-cards' && <MyCards />}
-          {currentScreen === 'finder'   && <BestCardFinder />}
-          {currentScreen === 'suggest'  && !IS_STATIC && <SuggestCard />}
-          {currentScreen === 'admin'    && isAdmin    && <AdminPanel />}
+          {currentScreen === 'my-cards'   && <MyCards />}
+          {currentScreen === 'finder'    && <BestCardFinder />}
+          {currentScreen === 'portfolio' && !IS_STATIC && <PortfolioOptimizer />}
+          {currentScreen === 'suggest'   && !IS_STATIC && <SuggestCard />}
+          {currentScreen === 'admin'     && isAdmin    && <AdminPanel />}
         </Suspense>
       </main>
     </div>
@@ -242,20 +245,22 @@ const App: React.FC = () => {
   return (
     <Router>
       <ErrorBoundary>
-        <Routes>
-          <Route path="/login"           element={<GuestOnly><Login /></GuestOnly>} />
-          <Route path="/forgot-password" element={<GuestOnly><ForgotPassword /></GuestOnly>} />
-          <Route path="/reset-password"  element={<ResetPassword />} />
-          <Route
-            path="/"
-            element={
-              <AuthGuard>
-                <Dashboard />
-              </AuthGuard>
-            }
-          />
-          <Route path="*" element={<Navigate to="/" replace />} />
-        </Routes>
+        <Suspense fallback={<LoadingSpinner />}>
+          <Routes>
+            <Route path="/login"           element={<GuestOnly><Login /></GuestOnly>} />
+            <Route path="/forgot-password" element={<GuestOnly><ForgotPassword /></GuestOnly>} />
+            <Route path="/reset-password"  element={<ResetPassword />} />
+            <Route
+              path="/"
+              element={
+                <AuthGuard>
+                  <Dashboard />
+                </AuthGuard>
+              }
+            />
+            <Route path="*" element={<Navigate to="/" replace />} />
+          </Routes>
+        </Suspense>
       </ErrorBoundary>
     </Router>
   );

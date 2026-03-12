@@ -105,6 +105,11 @@ export const api = {
     fetchAPI<import('../types').RecommendationResponse>(
       `/recommendations?category=${encodeURIComponent(category)}`
     ),
+  optimizePortfolio: (spending: import('../types').SpendingEntry[]) =>
+    fetchAPI<import('../types').PortfolioResponse>('/recommendations/portfolio', {
+      method: 'POST',
+      body: JSON.stringify({ spending }),
+    }),
 
   // Card Suggestions (user-facing)
   submitSuggestion: (data: {

@@ -18,6 +18,7 @@ export interface StaticCard {
   name: string;
   issuer_id: number;
   network: string;
+  annual_fee: number;
 }
 
 export interface StaticRule {
@@ -66,27 +67,27 @@ export const CATEGORIES: StaticCategory[] = [
 
 // Card IDs (1-indexed by order)
 export const CARDS: StaticCard[] = [
-  { id: 1,  name: 'Freedom Unlimited',    issuer_id: 1, network: 'Visa' },
-  { id: 2,  name: 'Freedom Flex',          issuer_id: 1, network: 'Mastercard' },
-  { id: 3,  name: 'Sapphire Preferred',    issuer_id: 1, network: 'Visa' },
-  { id: 4,  name: 'Sapphire Reserve',      issuer_id: 1, network: 'Visa' },
-  { id: 5,  name: 'Gold',                  issuer_id: 2, network: 'American Express' },
-  { id: 6,  name: 'Platinum',              issuer_id: 2, network: 'American Express' },
-  { id: 7,  name: 'Blue Cash Preferred',   issuer_id: 2, network: 'American Express' },
-  { id: 8,  name: 'Blue Cash Everyday',    issuer_id: 2, network: 'American Express' },
-  { id: 9,  name: 'Venture',               issuer_id: 3, network: 'Visa' },
-  { id: 10, name: 'Venture X',             issuer_id: 3, network: 'Visa' },
-  { id: 11, name: 'SavorOne',              issuer_id: 3, network: 'Mastercard' },
-  { id: 12, name: 'Discover it Cash Back', issuer_id: 4, network: 'Discover' },
-  { id: 13, name: 'Discover it Miles',     issuer_id: 4, network: 'Discover' },
-  { id: 14, name: 'Double Cash',           issuer_id: 5, network: 'Mastercard' },
-  { id: 15, name: 'Custom Cash',           issuer_id: 5, network: 'Mastercard' },
-  { id: 16, name: 'Premier',               issuer_id: 5, network: 'Mastercard' },
-  { id: 17, name: 'Cash Rewards',          issuer_id: 6, network: 'Visa' },
-  { id: 18, name: 'Travel Rewards',        issuer_id: 6, network: 'Visa' },
-  { id: 19, name: 'Cash+',                 issuer_id: 7, network: 'Visa' },
-  { id: 20, name: 'Altitude Go',           issuer_id: 7, network: 'Visa' },
-  { id: 21, name: 'Active Cash',           issuer_id: 8, network: 'Visa' },
+  { id: 1,  name: 'Freedom Unlimited',    issuer_id: 1, network: 'Visa',             annual_fee: 0 },
+  { id: 2,  name: 'Freedom Flex',          issuer_id: 1, network: 'Mastercard',       annual_fee: 0 },
+  { id: 3,  name: 'Sapphire Preferred',    issuer_id: 1, network: 'Visa',             annual_fee: 95 },
+  { id: 4,  name: 'Sapphire Reserve',      issuer_id: 1, network: 'Visa',             annual_fee: 550 },
+  { id: 5,  name: 'Gold',                  issuer_id: 2, network: 'American Express', annual_fee: 325 },
+  { id: 6,  name: 'Platinum',              issuer_id: 2, network: 'American Express', annual_fee: 695 },
+  { id: 7,  name: 'Blue Cash Preferred',   issuer_id: 2, network: 'American Express', annual_fee: 95 },
+  { id: 8,  name: 'Blue Cash Everyday',    issuer_id: 2, network: 'American Express', annual_fee: 0 },
+  { id: 9,  name: 'Venture',               issuer_id: 3, network: 'Visa',             annual_fee: 95 },
+  { id: 10, name: 'Venture X',             issuer_id: 3, network: 'Visa',             annual_fee: 395 },
+  { id: 11, name: 'SavorOne',              issuer_id: 3, network: 'Mastercard',       annual_fee: 0 },
+  { id: 12, name: 'Discover it Cash Back', issuer_id: 4, network: 'Discover',         annual_fee: 0 },
+  { id: 13, name: 'Discover it Miles',     issuer_id: 4, network: 'Discover',         annual_fee: 0 },
+  { id: 14, name: 'Double Cash',           issuer_id: 5, network: 'Mastercard',       annual_fee: 0 },
+  { id: 15, name: 'Custom Cash',           issuer_id: 5, network: 'Mastercard',       annual_fee: 0 },
+  { id: 16, name: 'Premier',               issuer_id: 5, network: 'Mastercard',       annual_fee: 95 },
+  { id: 17, name: 'Cash Rewards',          issuer_id: 6, network: 'Visa',             annual_fee: 0 },
+  { id: 18, name: 'Travel Rewards',        issuer_id: 6, network: 'Visa',             annual_fee: 0 },
+  { id: 19, name: 'Cash+',                 issuer_id: 7, network: 'Visa',             annual_fee: 0 },
+  { id: 20, name: 'Altitude Go',           issuer_id: 7, network: 'Visa',             annual_fee: 0 },
+  { id: 21, name: 'Active Cash',           issuer_id: 8, network: 'Visa',             annual_fee: 0 },
 ];
 
 // Rules — each entry maps (card_id, category_id) → reward multiplier + metadata
