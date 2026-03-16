@@ -1,197 +1,166 @@
-# Credit Card Rewards Optimizer
+# CardStack
 
-A production-ready MVP web application that recommends the best credit card for a spending category based on current reward structures.
+A full-stack credit card rewards optimizer that helps you maximize points, find the best card for any purchase, and intelligently redeem miles for award travel.
 
 ## Features
 
-- **Card Management**: Add and remove credit cards from your collection
-- **Smart Recommendations**: Get the best card recommendation for any spending category (Dining, Travel, Groceries, Movies, General)
-- **Reward Resolution Engine**: Automatically resolves conflicts and finds the highest multiplier based on active reward rules
-- **Clean Architecture**: Well-separated backend (FastAPI) and frontend (React + TypeScript)
+- **My Cards** — Manage your credit card portfolio with card art, point balances, and annual fees
+- **Best Card Finder** — Get the highest-earning card recommendation for any spending category with real-time reward resolution
+- **Portfolio Optimizer** — Analyze your full card stack for coverage gaps and ROI across all spending categories
+- **Redemption Concierge** — AI-powered award travel advisor:
+  - Enter departure city, destination, travel month, and cabin class
+  - Fetches live cash fares from Google Flights (via SerpAPI) for accurate cents-per-point calculation
+  - Finds all transfer paths from your flexible points (Chase UR, Amex MR, Capital One Miles, Citi TY) to airline programs
+  - Gemini AI explains which airlines fly the route, which alliance each belongs to, and which award program to use for each carrier
+  - Deep-links directly to each airline program's award search page
+  - Step-by-step booking instructions with honest availability warnings
 
 ## Tech Stack
 
 ### Backend
-- **Python 3.8+**
-- **FastAPI** - Modern, fast web framework
-- **SQLAlchemy** - ORM for database operations
-- **SQLite** - Database (easily upgradeable to Postgres)
-- **Pydantic** - Data validation
+- **Python 3.9+**
+- **FastAPI** — async web framework
+- **SQLAlchemy** — ORM (SQLite for dev, PostgreSQL for prod)
+- **Pydantic v2** — data validation
+- **Google Gemini** (`gemini-2.5-flash-lite`) — free-tier AI reasoning
+- **SerpAPI** — Google Flights live fare data (250 free searches/month)
+- **AviationStack** — IATA airport code lookup (500 free requests/month)
 
 ### Frontend
-- **React 18** - UI library
-- **TypeScript** - Type safety
-- **React Scripts** - Build tooling
+- **React 18** + **TypeScript**
+- **React Router v6**
+- **CRA / react-scripts 5**
 
 ## Project Structure
 
 ```
-credit-card-rewards-optimizer/
+cardstack/
 ├── backend/
 │   ├── app/
-│   │   ├── __init__.py
-│   │   ├── main.py              # FastAPI application entry point
-│   │   ├── database.py          # Database configuration
-│   │   ├── models.py            # SQLAlchemy models
-│   │   ├── schemas.py           # Pydantic schemas
-│   │   ├── seed_data.py         # Database seeding script
-│   │   ├── routes/              # API route handlers
+│   │   ├── main.py                       # FastAPI entry point, route registration
+│   │   ├── config.py                     # All settings loaded from environment
+│   │   ├── models.py                     # SQLAlchemy models
+│   │   ├── schemas.py                    # Pydantic v2 schemas
+│   │   ├── seed_data.py                  # DB seeding + lightweight migrations
+│   │   ├── auth.py                       # JWT auth helpers
+│   │   ├── routes/
 │   │   │   ├── cards.py
-│   │   │   ├── categories.py
 │   │   │   ├── recommendations.py
-│   │   │   └── user_cards.py
-│   │   └── services/            # Business logic
-│   │       └── reward_service.py  # Reward resolution engine
+│   │   │   ├── user_cards.py
+│   │   │   └── concierge.py              # Redemption Concierge endpoints
+│   │   └── services/
+│   │       ├── reward_service.py         # Reward resolution engine
+│   │       ├── concierge_service.py      # Transfer path finder + Gemini AI
+│   │       ├── serpapi_service.py        # Live Google Flights prices
+│   │       └── aviationstack_service.py  # IATA code lookup
+│   ├── tests/
+│   │   └── test_concierge.py
+│   ├── .env.example                      # Copy to .env and fill in keys
 │   └── requirements.txt
 ├── frontend/
 │   ├── src/
 │   │   ├── components/
 │   │   │   ├── MyCards.tsx
-│   │   │   └── BestCardFinder.tsx
-│   │   ├── services/
-│   │   │   └── api.ts           # API client
-│   │   ├── types.ts             # TypeScript type definitions
-│   │   ├── App.tsx
-│   │   └── index.tsx
-│   ├── package.json
-│   └── tsconfig.json
+│   │   │   ├── BestCardFinder.tsx
+│   │   │   ├── PortfolioOptimizer.tsx
+│   │   │   └── RedemptionConcierge.tsx
+│   │   ├── services/api.ts
+│   │   ├── types.ts
+│   │   └── App.tsx
+│   └── package.json
 └── README.md
 ```
 
-## Setup Instructions
+## Setup
 
 ### Prerequisites
-
-- Python 3.8 or higher
+- Python 3.9+
 - Node.js 16+ and npm
-- (Optional) Virtual environment tool (venv, virtualenv, etc.)
 
-### Backend Setup
+### 1. Backend
 
-1. **Navigate to the backend directory:**
-   ```bash
-   cd backend
-   ```
+```bash
+cd backend
+python -m venv venv
+source venv/bin/activate      # Windows: venv\Scripts\activate
+pip install -r requirements.txt
+```
 
-2. **Create a virtual environment (recommended):**
-   ```bash
-   python -m venv venv
-   source venv/bin/activate  # On Windows: venv\Scripts\activate
-   ```
+Copy the example env file and add your API keys:
 
-3. **Install dependencies:**
-   ```bash
-   pip install -r requirements.txt
-   ```
+```bash
+cp .env.example .env
+```
 
-4. **Run the backend server:**
-   ```bash
-   uvicorn app.main:app --reload
-   ```
+| Variable | Purpose | Free tier |
+|---|---|---|
+| `GEMINI_API_KEY` | AI analysis (required for full Concierge) | [aistudio.google.com](https://aistudio.google.com/app/apikey) — free |
+| `SERPAPI_API_KEY` | Live Google Flights prices | [serpapi.com](https://serpapi.com) — 250/month free |
+| `AVIATIONSTACK_API_KEY` | IATA airport code lookup | [aviationstack.com](https://aviationstack.com) — 500/month free |
+| `JWT_SECRET` | Auth token signing | Set to any long random string |
 
-   The API will be available at `http://localhost:8000`
-   - API docs: `http://localhost:8000/docs`
-   - Alternative docs: `http://localhost:8000/redoc`
+Start the server:
 
-   **Note:** The database (`credit_cards.db`) will be created automatically on first run, and seed data will be loaded.
+```bash
+uvicorn app.main:app --reload
+```
 
-### Frontend Setup
+API available at `http://localhost:8000` · Docs at `/docs`
 
-1. **Navigate to the frontend directory:**
-   ```bash
-   cd frontend
-   ```
+### 2. Frontend
 
-2. **Install dependencies:**
-   ```bash
-   npm install
-   ```
+```bash
+cd frontend
+npm install
+npm start
+```
 
-3. **Start the development server:**
-   ```bash
-   npm start
-   ```
+App available at `http://localhost:3000`
 
-   The frontend will be available at `http://localhost:3000`
+## API Reference
 
-   **Note:** The frontend is configured to connect to `http://localhost:8000` by default. To change this, set the `REACT_APP_API_URL` environment variable.
+### Concierge
+| Method | Path | Description |
+|---|---|---|
+| `POST` | `/api/concierge/search` | Find transfer paths + AI analysis |
+| `GET` | `/api/concierge/partners` | List all active transfer partners |
+| `PUT` | `/api/user/cards/{id}/balance` | Update stored point balance |
 
-## API Endpoints
+### Cards & Recommendations
+| Method | Path | Description |
+|---|---|---|
+| `GET` | `/api/cards` | All supported credit cards |
+| `POST` | `/api/user/cards` | Add card to portfolio |
+| `DELETE` | `/api/user/cards/{id}` | Remove card from portfolio |
+| `GET` | `/api/recommendations?category=Dining` | Best card for a spending category |
+| `POST` | `/api/recommendations/portfolio` | Full portfolio analysis |
 
-### Cards
-- `GET /cards` - Get all supported credit cards
-- `POST /user/cards` - Add a card to user's collection (body: `{"credit_card_id": 1}`)
-- `DELETE /user/cards/{id}` - Remove a card from user's collection
+## How the Concierge Works
 
-### Categories
-- `GET /categories` - Get all reward categories
+1. **Inventory** — Aggregates your point balances by flexible currency (Chase UR, Amex MR, etc.)
+2. **Transfer paths** — Matches each currency to airline programs via the transfer partner database (35 partners across 4 currencies)
+3. **Live pricing** — Fetches the cheapest one-way cash fare from Google Flights via SerpAPI; falls back to seeded estimates if unavailable
+4. **CPP calculation** — `(cash_fare − taxes) / points_needed × 100` — higher is better; > 2¢ is excellent
+5. **AI analysis** — Gemini receives your balances, all paths, and live flight data; returns:
+   - Which airlines operate the specific route and which award program books each one
+   - Best redemption recommendation with honest Saver-rate caveats
+   - Award seat availability patterns and advance booking tips
+   - Step-by-step transfer and booking instructions
 
-### Recommendations
-- `GET /recommendations?category=Dining` - Get best card recommendations for a category
+> **Note:** Points shown are published Saver award rates — the minimum if space is available. Always verify availability on the airline's site before transferring points, as transfers are irreversible.
 
-## Database Schema
+## Running Tests
 
-### CreditCard
-- `id` (Integer, Primary Key)
-- `name` (String, Unique)
-- `issuer` (String)
-- `network` (String)
+```bash
+# Backend
+cd backend
+pytest
 
-### RewardCategory
-- `id` (Integer, Primary Key)
-- `name` (String, Unique)
-
-### RewardRule
-- `id` (Integer, Primary Key)
-- `credit_card_id` (Integer, Foreign Key)
-- `category_id` (Integer, Foreign Key)
-- `multiplier` (Float) - e.g., 1.5, 3, 5
-- `cap_amount` (Float, Nullable) - Optional spending cap
-- `cap_period` (Enum, Nullable) - monthly, quarterly, yearly, or null
-- `is_rotating` (Boolean) - True for rotating category cards
-- `start_date` (Date) - When rule becomes active
-- `end_date` (Date, Nullable) - When rule expires
-- `notes` (String, Nullable) - Additional context
-
-### UserCard
-- `id` (Integer, Primary Key)
-- `credit_card_id` (Integer, Foreign Key)
-
-## Reward Resolution Logic
-
-The reward resolution engine (`services/reward_service.py`) implements the following business logic:
-
-1. **Fetches all user-added cards**
-2. **Filters active reward rules** - Only includes rules where current date is within `start_date` and `end_date` (if specified)
-3. **Resolves conflicts** - Highest multiplier wins for each card
-4. **Returns sorted list** - Recommendations sorted by multiplier (descending)
-
-## Seed Data
-
-The application includes seed data for:
-- **Chase Freedom Unlimited** - 1.5% general, 3% dining
-- **Chase Freedom Flex** - 1% general, 3% dining, 5% rotating categories
-- **Amex Gold** - 4x dining, 4x groceries (up to $25k/year)
-- **Capital One Venture** - 2x on all purchases
-
-Categories: Dining, Travel, Groceries, Movies, General
-
-## Development Notes
-
-- **No Authentication**: This is an MVP with single-user support (no auth required)
-- **No Card Numbers**: Only card types/names are stored
-- **Database**: SQLite for MVP, easily upgradeable to Postgres by changing the connection string in `database.py`
-- **CORS**: Configured to allow requests from `http://localhost:3000`
-
-## Future Enhancements
-
-- User authentication and multi-user support
-- Historical reward rule tracking
-- Spending cap tracking and alerts
-- More sophisticated recommendation algorithms
-- Export/import functionality
-- Mobile app
+# Frontend
+cd frontend
+npm test
+```
 
 ## License
 
-This project is provided as-is for demonstration purposes.
+MIT
