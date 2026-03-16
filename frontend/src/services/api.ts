@@ -153,4 +153,54 @@ export const api = {
       `/admin/sync-cards${url ? `?url=${encodeURIComponent(url)}` : ''}`,
       { method: 'POST' }
     ),
+
+  // Redemption Concierge
+  searchConcierge: (payload: {
+    origin: string;
+    destination: string;
+    travel_month: string;
+    cabin: string;
+    point_balances: Record<number, number>;
+  }) => {
+    // Uses a 30-second timeout because Claude API reasoning takes 3-8 seconds.
+    const token = getAuthToken();
+    const headers: Record<string, string> = { 'Content-Type': 'application/json' };
+    if (token) headers['Authorization'] = `Bearer ${token}`;
+    const controller = new AbortController();
+    const timeoutId = setTimeout(() => controller.abort(), 30000);
+    return fetch(`${API_BASE_URL}/concierge/search`, {
+      method: 'POST',
+      headers,
+      body: JSON.stringify(payload),
+      signal: controller.signal,
+    })
+      .then(async (response) => {
+        clearTimeout(timeoutId);
+        if (!response.ok) {
+          if (response.status === 401) {
+            clearAuthToken();
+            window.dispatchEvent(new Event('auth:unauthorized'));
+          }
+          const error = await response.json().catch(() => ({ detail: 'Unknown error' }));
+          throw new Error(error.detail || `HTTP error! status: ${response.status}`);
+        }
+        return response.json() as Promise<import('../types').ConciergeSearchResponse>;
+      })
+      .catch((err) => {
+        clearTimeout(timeoutId);
+        if (err instanceof Error && err.name === 'AbortError') {
+          throw new Error('Request timed out. The AI analysis is taking longer than expected — please try again.');
+        }
+        throw err;
+      });
+  },
+
+  getTransferPartners: () =>
+    fetchAPI<import('../types').TransferPartner[]>('/concierge/partners'),
+
+  updateCardBalance: (userCardId: number, balance: number | null) =>
+    fetchAPI<import('../types').UserCardWithBalance>(`/user/cards/${userCardId}/balance`, {
+      method: 'PUT',
+      body: JSON.stringify({ point_balance: balance }),
+    }),
 };

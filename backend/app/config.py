@@ -3,6 +3,14 @@ Application configuration from environment variables.
 Single place for env handling and deployment config.
 """
 import os
+from pathlib import Path
+
+# Load .env file if present (no-op if file doesn't exist or dotenv not installed)
+try:
+    from dotenv import load_dotenv
+    load_dotenv(Path(__file__).parent.parent / ".env")
+except ImportError:
+    pass
 
 
 class Settings:
@@ -25,6 +33,21 @@ class Settings:
 
     # CORS (comma-separated list of allowed origins)
     allowed_origins: str = os.getenv("ALLOWED_ORIGINS", "http://localhost:3000")
+
+    # Anthropic API (for Redemption Concierge AI reasoning — paid)
+    anthropic_api_key: str = os.getenv("ANTHROPIC_API_KEY", "")
+
+    # Google Gemini API (for Redemption Concierge AI reasoning — free tier)
+    # Get a free key at https://aistudio.google.com/app/apikey
+    gemini_api_key: str = os.getenv("GEMINI_API_KEY", "")
+
+    # Aviation Stack API (for IATA airport code lookup)
+    # Free tier: 500 requests/month — https://aviationstack.com
+    aviationstack_api_key: str = os.getenv("AVIATIONSTACK_API_KEY", "")
+
+    # SerpAPI (Google Flights cash price lookup for accurate CPP)
+    # Free tier: 250 searches/month — https://serpapi.com
+    serpapi_api_key: str = os.getenv("SERPAPI_API_KEY", "")
 
 
 settings = Settings()

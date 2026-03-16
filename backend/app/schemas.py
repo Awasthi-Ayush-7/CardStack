@@ -229,3 +229,89 @@ class AdminUser(BaseModel):
 
     class Config:
         from_attributes = True
+
+
+# ---------------------------------------------------------------------------
+# Redemption Concierge Schemas
+# ---------------------------------------------------------------------------
+
+class ConciergeSearchRequest(BaseModel):
+    origin: str = "New York"               # departure city, e.g. "Los Angeles"
+    destination: str
+    travel_month: str                       # e.g. "October 2026"
+    cabin: str = "economy"                  # "economy" | "business" | "first"
+    point_balances: dict[int, int] = {}     # {user_card_id: balance}
+
+
+class TransferPath(BaseModel):
+    source_currency: str
+    partner_program: str
+    destination: str
+    cabin: str
+    points_required: int
+    effective_points_needed: int
+    user_balance: int
+    points_available_after_transfer: int
+    can_afford: bool
+    cash_price_usd: int
+    taxes_fees_usd: int
+    cpp: float
+    is_great_deal: bool
+    transfer_ratio: float
+    bonus_ratio: Optional[float] = None
+    bonus_expires: Optional[str] = None
+    portal_url: Optional[str] = None
+    award_search_url: Optional[str] = None
+    award_notes: Optional[str] = None
+    is_estimated: bool = False
+    live_cash_price: Optional[float] = None
+
+
+class BookingInstructionCard(BaseModel):
+    source_currency: str
+    partner_program: str
+    cabin: str
+    cpp: float
+    is_great_deal: bool
+    can_afford: bool
+    steps: List[str]
+    portal_url: Optional[str] = None
+
+
+class ConciergeSearchResponse(BaseModel):
+    destination: str
+    travel_month: str
+    cabin: str
+    paths: List[TransferPath]
+    booking_cards: List[BookingInstructionCard]
+    claude_analysis: str
+    best_path: Optional[TransferPath] = None
+
+
+class TransferPartnerOut(BaseModel):
+    id: int
+    source_currency: str
+    partner_program: str
+    transfer_ratio: float
+    bonus_ratio: Optional[float] = None
+    bonus_expires: Optional[date] = None
+    is_active: bool
+    portal_url: Optional[str] = None
+
+    class Config:
+        from_attributes = True
+
+
+class UserCardBalanceUpdate(BaseModel):
+    point_balance: Optional[int] = None
+
+
+class UserCardWithBalance(BaseModel):
+    id: int
+    user_id: int
+    credit_card_id: int
+    credit_card: CreditCard
+    point_balance: Optional[int] = None
+
+    class Config:
+        from_attributes = True

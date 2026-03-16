@@ -5,7 +5,7 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from .config import settings
 from .database import engine, Base
-from .routes import cards, categories, recommendations, user_cards, auth, issuers, admin, suggestions
+from .routes import cards, categories, recommendations, user_cards, auth, issuers, admin, suggestions, concierge
 from .seed_data import seed_database
 
 # Create database tables
@@ -40,6 +40,7 @@ app.include_router(recommendations.router, prefix="/api")
 app.include_router(user_cards.router, prefix="/api")
 app.include_router(admin.router, prefix="/api")
 app.include_router(suggestions.router, prefix="/api")
+app.include_router(concierge.router, prefix="/api")
 
 
 @app.get("/")

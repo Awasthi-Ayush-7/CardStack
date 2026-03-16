@@ -16,13 +16,14 @@ import './App.css';
 const MyCards             = lazy(() => import('./components/MyCards'));
 const BestCardFinder      = lazy(() => import('./components/BestCardFinder'));
 const PortfolioOptimizer  = lazy(() => import('./components/PortfolioOptimizer'));
+const RedemptionConcierge = lazy(() => import('./components/RedemptionConcierge'));
 const SuggestCard         = lazy(() => import('./components/SuggestCard'));
 const AdminPanel          = lazy(() => import('./components/AdminPanel'));
 const Login               = lazy(() => import('./components/Login'));
 const ForgotPassword      = lazy(() => import('./components/ForgotPassword'));
 const ResetPassword       = lazy(() => import('./components/ResetPassword'));
 
-type Screen = 'my-cards' | 'finder' | 'portfolio' | 'suggest' | 'admin';
+type Screen = 'my-cards' | 'finder' | 'portfolio' | 'concierge' | 'suggest' | 'admin';
 
 const LoadingSpinner: React.FC = () => (
   <div
@@ -75,7 +76,8 @@ const Dashboard: React.FC = () => {
   const navItems: NavItem[] = [
     { key: 'my-cards',   label: 'My Cards' },
     { key: 'finder',     label: 'Best Card Finder' },
-    ...(!IS_STATIC ? [{ key: 'portfolio' as Screen, label: 'Portfolio' }] : []),
+    ...(!IS_STATIC ? [{ key: 'portfolio'  as Screen, label: 'Portfolio' }] : []),
+    ...(!IS_STATIC ? [{ key: 'concierge' as Screen, label: 'Concierge' }] : []),
     ...(!IS_STATIC ? [{ key: 'suggest'   as Screen, label: 'Suggest a Card' }] : []),
     ...(isAdmin    ? [{ key: 'admin'     as Screen, label: 'Admin' }] : []),
   ];
@@ -216,7 +218,8 @@ const Dashboard: React.FC = () => {
         <Suspense fallback={<LoadingSpinner />}>
           {currentScreen === 'my-cards'   && <MyCards />}
           {currentScreen === 'finder'    && <BestCardFinder />}
-          {currentScreen === 'portfolio' && !IS_STATIC && <PortfolioOptimizer />}
+          {currentScreen === 'portfolio'  && !IS_STATIC && <PortfolioOptimizer />}
+          {currentScreen === 'concierge' && !IS_STATIC && <RedemptionConcierge />}
           {currentScreen === 'suggest'   && !IS_STATIC && <SuggestCard />}
           {currentScreen === 'admin'     && isAdmin    && <AdminPanel />}
         </Suspense>

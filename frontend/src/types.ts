@@ -110,3 +110,65 @@ export interface AdminUser {
   role: 'admin' | 'user' | 'test';
   created_at: string;
 }
+
+// Redemption Concierge Types
+
+export interface TransferPath {
+  source_currency: string;
+  partner_program: string;
+  destination: string;
+  cabin: string;
+  points_required: number;
+  effective_points_needed: number;
+  user_balance: number;
+  points_available_after_transfer: number;
+  can_afford: boolean;
+  cash_price_usd: number;
+  taxes_fees_usd: number;
+  cpp: number;
+  is_great_deal: boolean;
+  transfer_ratio: number;
+  bonus_ratio: number | null;
+  bonus_expires: string | null;
+  portal_url: string | null;
+  award_search_url: string | null;
+  award_notes: string | null;
+  is_estimated: boolean;
+  live_cash_price: number | null;
+}
+
+export interface BookingInstructionCard {
+  source_currency: string;
+  partner_program: string;
+  cabin: string;
+  cpp: number;
+  is_great_deal: boolean;
+  can_afford: boolean;
+  steps: string[];
+  portal_url: string | null;
+}
+
+export interface ConciergeSearchResponse {
+  destination: string;
+  travel_month: string;
+  cabin: string;
+  paths: TransferPath[];
+  booking_cards: BookingInstructionCard[];
+  claude_analysis: string;
+  best_path: TransferPath | null;
+}
+
+export interface TransferPartner {
+  id: number;
+  source_currency: string;
+  partner_program: string;
+  transfer_ratio: number;
+  bonus_ratio: number | null;
+  bonus_expires: string | null;
+  is_active: boolean;
+  portal_url: string | null;
+}
+
+export interface UserCardWithBalance extends UserCard {
+  point_balance: number | null;
+}

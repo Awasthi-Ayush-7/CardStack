@@ -114,6 +114,7 @@ class UserCard(Base):
     id = Column(Integer, primary_key=True, index=True)
     user_id = Column(Integer, ForeignKey("users.id"), nullable=False)
     credit_card_id = Column(Integer, ForeignKey("credit_cards.id"), nullable=False)
+    point_balance = Column(Integer, nullable=True)  # user-entered points balance
 
     # Relationships
     user = relationship("User", back_populates="user_cards")
@@ -137,3 +138,32 @@ class CardSuggestion(Base):
 
     # Relationships
     user = relationship("User", back_populates="suggestions")
+
+
+class TransferPartner(Base):
+    """Maps a flexible points currency to an airline/hotel program, including transfer bonuses."""
+    __tablename__ = "transfer_partners"
+
+    id                      = Column(Integer, primary_key=True, index=True)
+    source_currency         = Column(String, nullable=False, index=True)  # e.g. "Chase UR"
+    partner_program         = Column(String, nullable=False)              # e.g. "United MileagePlus"
+    transfer_ratio          = Column(Float, nullable=False, default=1.0)  # base ratio (1.0 = 1:1)
+    bonus_ratio             = Column(Float, nullable=True)                # e.g. 0.30 for 30% bonus
+    bonus_expires           = Column(Date, nullable=True)
+    is_active               = Column(Boolean, nullable=False, default=True)
+    portal_url              = Column(String, nullable=True)               # deep-link to transfer portal
+    award_search_url_template = Column(String, nullable=True)            # template for award search, {iata} placeholder
+
+
+class AwardCost(Base):
+    """Seeded award chart data: points needed to fly a given destination."""
+    __tablename__ = "award_costs"
+
+    id              = Column(Integer, primary_key=True, index=True)
+    destination     = Column(String, nullable=False, index=True)  # e.g. "Tokyo"
+    airline_program = Column(String, nullable=False)              # e.g. "United MileagePlus"
+    cabin           = Column(String, nullable=False)              # "economy" | "business" | "first"
+    points_required = Column(Integer, nullable=False)
+    cash_price_usd  = Column(Integer, nullable=False)             # benchmark cash fare
+    taxes_fees_usd  = Column(Integer, nullable=False, default=0)
+    notes           = Column(String, nullable=True)
